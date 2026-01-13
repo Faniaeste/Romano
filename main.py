@@ -22,6 +22,12 @@ decenas = {10:'X',20:'XX',30:'XXX',40:'XL',50:'L',60:'LX',70:'LXX',80:'LXXX',90:
 centenas = {100:'C',200:'CC',300:'CCC',400:'CD',500:'D',600:'DC',700:'DCC',800:'DCCC',900:'CM'}
 millares ={1000:'M', 2000:'MM', 3000:'MMM'}
 
+dic_entero_a_romano = {
+    1:'I', 2:'II', 3: 'III',4:'IV', 5:'V', 6:'VI', 7:'VII', 8:'VIII', 9:'VX'
+    10:'X',20:'XX',30:'XXX',40:'XL',50:'L',60:'LX',70:'LXX',80:'LXXX',90:'XC'
+    100:'C',200:'CC',300:'CCC',400:'CD',500:'D',600:'DC',700:'DCC',800:'DCCC',900:'CM'
+    1000:'M', 2000:'MM', 3000:'MMM'}
+
 class RomanNumberError( Exception ):
     pass
 
@@ -31,6 +37,14 @@ def entero_a_romano(numero):
     numero_list = list(numero)#Guardar una lista['1','9','9','4']
     print(numero_list)
     valor_romano = ''
+    cont = 0
+    valor_num = 1000
+    while cont < len(numero_list):
+        numero_list[cont] = int(numero_list[cont]) * valor_num
+        cont += 1
+        valor_num /= 10
+#--------------------------PRIMERA PRUEBA FALLIDA-----------------------------------------------------------------
+"""
     for i in range(0,len(numero_list)):
         if i == 0:
             numero_list[i] = int(numero_list[i]) * 1000
@@ -44,16 +58,18 @@ def entero_a_romano(numero):
         if i == 3:
             numero_list[i] = int(numero_list[i])
             valor_romano += unidades.get(numero_list[i])#IV
-            
-    print(numero_list)#['1','9','9','4']
+""" 
+#--------------------------PRIMERA PRUEBA FALLIDA-----------------------------------------------------------------
+"""          
+print(numero_list)#['1','9','9','4']
 
 
 
 
 
-    return valor_romano
+return valor_romano
 
-entero_a_romano(1994)
+print(entero_a_romano(1994))
 
 #1994
 #['1','9','9','4']
