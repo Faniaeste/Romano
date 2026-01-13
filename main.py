@@ -30,13 +30,28 @@ def entero_a_romano(numero):
     numero = str(numero)#Transformar en cadena el valor (numero)
     numero_list = list(numero)#Guardar una lista['1','9','9','4']
     print(numero_list)
+    valor_romano = ''
     for i in range(0,len(numero_list)):
         if i == 0:
             numero_list[i] = int(numero_list[i]) * 1000
-            print(numero_list)#['1','9','9','4']
+            valor_romano += millares.get(numero_list[i])#M
+        if i == 1:
+            numero_list[i] = int(numero_list[i]) * 100
+            valor_romano += centenas.get(numero_list[i])#CM
+        if i == 2:
+            numero_list[i] = int(numero_list[i]) * 10
+            valor_romano += decenas.get(numero_list[i])#XC
+        if i == 3:
+            numero_list[i] = int(numero_list[i])
+            valor_romano += unidades.get(numero_list[i])#IV
+            
+    print(numero_list)#['1','9','9','4']
 
 
-    return 'MCMXCIV'
+
+
+
+    return valor_romano
 
 entero_a_romano(1994)
 
