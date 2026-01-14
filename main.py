@@ -40,6 +40,7 @@ millares ={1000:'M', 2000:'MM', 3000:'MMM'}
 """ 
 #--------------------------PRIMERA PRUEBA FALLIDA-----------------------------------------------------------------
 dic_entero_a_romano = {
+    #0:''
     1:'I', 2:'II', 3: 'III',4:'IV', 5:'V', 6:'VI', 7:'VII', 8:'VIII', 9:'VX'
     10:'X',20:'XX',30:'XXX',40:'XL',50:'L',60:'LX',70:'LXX',80:'LXXX',90:'XC'
     100:'C',200:'CC',300:'CCC',400:'CD',500:'D',600:'DC',700:'DCC',800:'DCCC',900:'CM'
@@ -50,7 +51,17 @@ class RomanNumberError( Exception ):
 
 #a-1994 -> MCMXCIV
 def entero_a_romano(numero):
-    numero = str(numero)#Transformar en cadena el valor (numero)
+    #numero = str(numero)#Transformar en cadena el valor (numero)
+    numero = "{:0>4d}".format(numero)
+"""
+if len(numero) == 3:
+    numero = '0' + numero
+elif len(numero) == 2:
+    numero = '00' + numero
+elif len(numero) == 1:
+    numero = '000' + numero
+"""
+
     numero_list = list(numero)#Guardar una lista['1','9','9','4']
     print(numero_list)
     valor_romano = ''
@@ -62,12 +73,7 @@ def entero_a_romano(numero):
         cont += 1
         valor_num /= 10
 
-       
-    print(numero_list)#['1','9','9','4']
-
     return valor_romano
 
 print(entero_a_romano(1994))
 
-#1994
-#['1','9','9','4']

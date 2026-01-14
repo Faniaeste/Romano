@@ -3,3 +3,6 @@ print("María: ",diccionario.get("María"))
 
 for c,v in diccionario.items():
     print(c+'-'str(v))
+
+valor = 1994
+print(len(valor))
