@@ -50,7 +50,16 @@ class RomanNumberError( Exception ):
     pass
 
 #a-1994 -> MCMXCIV
-def entero_a_romano(numero):
+def romano_a_entero(romano:str)->int:#'III'
+    list_romano = list(romano)#['I','I','I']
+    valor_entero = 0
+    for i in list_romano:
+        valor_entero = valor_entero + dic_romano_a_entero.get(i)
+
+    pass
+
+
+def entero_a_romano(numero:int )->str:
     #numero = str(numero)#Transformar en cadena el valor (numero)
     numero = "{:0>4d}".format(numero)
 """
@@ -76,4 +85,7 @@ elif len(numero) == 1:
     return valor_romano
 
 print(entero_a_romano(1994))
+
+
+
 
