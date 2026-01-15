@@ -64,14 +64,18 @@ def romano_a_entero(romano:str)->int:#'III'
     list_romano = list(romano)#['I','I','I']
     valor_entero = 0
     for i in range(0,len(list_romano)):
-        if i == 0:
-            if dic_romano_a_entero.get(list_romano[i]) < dic_romano_a_entero.get(list_romano[i+1]):
-                valor_entero = dic_romano_a_entero.get(list_romano[i+1]) - dic_romano_a_entero.get(list_romano[i])
+        if i != 0:
+            if dic_romano_a_entero.get(list_romano[i-1]) < dic_romano_a_entero.get(list_romano[i]):
+                valor_entero -= dic_romano_a_entero.get(list_romano[i-1])
+                valor_entero += dic_romano_a_entero.get(list_romano[i]) - dic_romano_a_entero.get(list_romano[i-1])
+            else:
+                valor_entero += dic_romano_a_entero.get(list_romano[i])
         else: 
-            valor_entero = valor_entero + dic_romano_a_entero.get(list_romano[i])
+            valor_entero = dic_romano_a_entero.get(list_romano[i])
 
     return valor_entero
-print(romano_a_entero('IV'))
+
+print(romano_a_entero("XXXIV"))
 
 
 def entero_a_romano(numero:int )->str:
