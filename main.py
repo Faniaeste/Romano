@@ -60,9 +60,21 @@ class RomanNumberError( Exception ):
     pass
 
 #a-1994 -> MCMXCIV
-def romano_a_entero(romano:str)->int:#'III'
-    list_romano = list(romano)#['I','I','I']
+def romano_a_entero(romano:str)->int:
+    list_romano = list(romano)
     valor_entero = 0
+    caracter_anterior = ''
+    cont_repes = 0
+
+    for caracter in list_romano:
+        if dic_romano_a_entero.get(caracter_anterior,0) < dic_romano_a_entero.get(caracter,0):
+            valor_entero -= dic_romano_a_entero.get(caracter_anterior,0)*2
+            
+        caracter_anterior = caracter
+        valor_entero += dic_romano_a_entero.get(caracter,0)
+
+            
+    """
     for i in range(0,len(list_romano)):
         if i != 0:
             if dic_romano_a_entero.get(list_romano[i-1]) < dic_romano_a_entero.get(list_romano[i]):
@@ -72,14 +84,14 @@ def romano_a_entero(romano:str)->int:#'III'
                 valor_entero += dic_romano_a_entero.get(list_romano[i])
         else: 
             valor_entero = dic_romano_a_entero.get(list_romano[i])
-
+    """
     return valor_entero
 
-print(romano_a_entero("XXXIV"))
+print(romano_a_entero("XC"))
 
 
 def entero_a_romano(numero:int )->str:
-    #numero = str(numero)#Transformar en cadena el valor (numero)
+    numero = str(numero)#Transformar en cadena el valor (numero)
     numero = "{:0>4d}".format(numero)
 
     numero_list = list(numero) #Guardar una lista['1','9','9','4']
@@ -94,9 +106,3 @@ def entero_a_romano(numero:int )->str:
         valor_num /= 10
 
     return valor_romano
-
-print(entero_a_romano(1994))
-
-
-
-
