@@ -44,7 +44,18 @@ millares ={1000:'M', 2000:'MM', 3000:'MMM'}
                 numero = '00' + numero
             elif len(numero) == 1:
                 numero = '000' + numero
-            """
+"""            
+           
+"""           for i in range(0,len(list_romano)):
+            if i != 0:
+            if dic_romano_a_entero.get(list_romano[i-1]) < dic_romano_a_entero.get(list_romano[i]):
+            valor_entero -= dic_romano_a_entero.get(list_romano[i-1])
+            valor_entero += dic_romano_a_entero.get(list_romano[i]) - dic_romano_a_entero.get(list_romano[i-1])
+            else:
+            valor_entero += dic_romano_a_entero.get(list_romano[i])
+            else: 
+            valor_entero = dic_romano_a_entero.get(list_romano[i])
+"""            
 
  
 #--------------------------PRIMERA PRUEBA FALLIDA-----------------------------------------------------------------
@@ -67,6 +78,13 @@ def romano_a_entero(romano:str)->int:
     cont_repes = 0
 
     for caracter in list_romano:
+        if caracter == caracter_anterior:
+            cont_repes += 1
+            if cont_repes > 2:
+                raise RomanNumberError("No se puede repetir el valor más de tres veces")
+        else:
+            cont_repes = 0
+
         if dic_romano_a_entero.get(caracter_anterior,0) < dic_romano_a_entero.get(caracter,0):
             valor_entero -= dic_romano_a_entero.get(caracter_anterior,0)*2
             
@@ -74,20 +92,10 @@ def romano_a_entero(romano:str)->int:
         valor_entero += dic_romano_a_entero.get(caracter,0)
 
             
-    """
-    for i in range(0,len(list_romano)):
-        if i != 0:
-            if dic_romano_a_entero.get(list_romano[i-1]) < dic_romano_a_entero.get(list_romano[i]):
-                valor_entero -= dic_romano_a_entero.get(list_romano[i-1])
-                valor_entero += dic_romano_a_entero.get(list_romano[i]) - dic_romano_a_entero.get(list_romano[i-1])
-            else:
-                valor_entero += dic_romano_a_entero.get(list_romano[i])
-        else: 
-            valor_entero = dic_romano_a_entero.get(list_romano[i])
-    """
+   
     return valor_entero
 
-print(romano_a_entero("XC"))
+print(romano_a_entero("CCCC"))
 
 
 def entero_a_romano(numero:int )->str:
