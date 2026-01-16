@@ -79,6 +79,10 @@ def romano_a_entero(romano:str)->int:
 
     for caracter in list_romano:
         if caracter == caracter_anterior:
+
+            if caracter == "D" or caracter == "L" or caracter == "V":
+                raise RomanNumberError("Los caracteres 'D' 'L'y'V' no se pueden repetir")
+            
             cont_repes += 1
             if cont_repes > 2:
                 raise RomanNumberError("No se puede repetir el valor más de tres veces")
@@ -95,7 +99,7 @@ def romano_a_entero(romano:str)->int:
    
     return valor_entero
 
-print(romano_a_entero("CCCC"))
+print(romano_a_entero("LL"))
 
 
 def entero_a_romano(numero:int )->str:

@@ -13,20 +13,36 @@ def test_romano_a_entero_IV():
 def test_romano_a_entero_no_repetir_3_veces01():
     with pytest.raises( RomanNumberError ) as exeptionInfo:
         romano_a_entero("IIII")
-        assert str(exeptionInfo.value) == "No se puede repetir el valor más de tres veces"
+    assert str(exeptionInfo.value) == "No se puede repetir el valor más de tres veces"
 
 def test_romano_a_entero_no_repetir_3_veces02():
     with pytest.raises( RomanNumberError ) as exeptionInfo:
         romano_a_entero("XXXX")
-        assert str(exeptionInfo.value) == "No se puede repetir el valor más de tres veces"
+    assert str(exeptionInfo.value) == "No se puede repetir el valor más de tres veces"
 
 def test_romano_a_entero_no_repetir_3_veces03():
     with pytest.raises( RomanNumberError ) as exeptionInfo:
         romano_a_entero("CCCC")
-        assert str(exeptionInfo.value) == "No se puede repetir el valor más de tres veces"
+    assert str(exeptionInfo.value) == "No se puede repetir el valor más de tres veces"
 
 def test_romano_a_entero_no_repetir_3_veces04():
     with pytest.raises( RomanNumberError ) as exeptionInfo:
         romano_a_entero("MMMM")
-        assert str(exeptionInfo.value) == "No se puede repetir el valor más de tres veces"
+    assert str(exeptionInfo.value) == "No se puede repetir el valor más de tres veces"
+
+def test_romano_a_entero_no_repetir_01():
+    with pytest.raises( RomanNumberError ) as exeptionInfo:
+        romano_a_entero("DD")
+    assert str(exeptionInfo.value) == ("Los caracteres 'D' 'L'y'V' no se pueden repetir")
+
+def test_romano_a_entero_no_repetir_02():
+    with pytest.raises( RomanNumberError ) as exeptionInfo:
+        romano_a_entero("LL")
+    assert str(exeptionInfo.value) == ("Los caracteres 'D' 'L'y'V' no se pueden repetir")
+
+def test_romano_a_entero_no_repetir_03():
+    with pytest.raises( RomanNumberError ) as exeptionInfo:
+        romano_a_entero("VV")
+    assert str(exeptionInfo.value) == ("Los caracteres 'D' 'L'y'V' no se pueden repetir")
+    
 
