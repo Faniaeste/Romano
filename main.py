@@ -55,7 +55,18 @@ millares ={1000:'M', 2000:'MM', 3000:'MMM'}
             valor_entero += dic_romano_a_entero.get(list_romano[i])
             else: 
             valor_entero = dic_romano_a_entero.get(list_romano[i])
-"""            
+""" 
+"""
+            if caracter_anterior == 'I' and (caracter != 'V' or caracter != 'X'):
+                valor_entero -= dic_romano_a_entero.get(caracter_anterior,0)*2
+                
+            
+            elif caracter_anterior == 'I' and (caracter != 'V' or caracter != 'X'):
+                valor_entero -= dic_romano_a_entero.get(caracter_anterior,0)*2
+            
+            else:
+                raise RomanNumberError('"X"sólo se puede restar de "V" y "X"')
+"""           
 
  
 #--------------------------PRIMERA PRUEBA FALLIDA-----------------------------------------------------------------
@@ -78,6 +89,7 @@ def romano_a_entero(romano:str)->int:
     valor_entero = 0
     caracter_anterior = ''
     cont_repes = 0
+    caracter_ante_anterior = ''
 
     for caracter in list_romano:
         if caracter == caracter_anterior:
@@ -92,22 +104,21 @@ def romano_a_entero(romano:str)->int:
             cont_repes = 0
 
         if dic_romano_a_entero.get(caracter_anterior,0) < dic_romano_a_entero.get(caracter,0):
-            """
-            if caracter_anterior == 'I' and (caracter != 'V' or caracter != 'X'):
-                valor_entero -= dic_romano_a_entero.get(caracter_anterior,0)*2
-                
-            
-            elif caracter_anterior == 'I' and (caracter != 'V' or caracter != 'X'):
-                valor_entero -= dic_romano_a_entero.get(caracter_anterior,0)*2
-            
-            else:
-                raise RomanNumberError('"X"sólo se puede restar de "V" y "X"')
-            """
+
+            if caracter_anterior and caracter_anterior in "VLD":
+                raise RomanNumberError('V,L Y D no se pueden restar')
+       
             if caracter_anterior and caracter not in regla_restas[caracter_anterior]:
                 raise RomanNumberError(f"{caracter_anterior} sólo se puede restar de {regla_restas[caracter_anterior][0]} y {regla_restas[caracter_anterior][1]}")
             
             valor_entero -= dic_romano_a_entero.get(caracter_anterior,0)*2
-            
+
+            if caracter_anterior and (caracter_ante_anterior == caracter_anterior) and caracter_anterior in "IXC":
+                raise RomanNumberError("I,X,C ya no pueden restarse porque tiene dos repeticiones")
+
+
+
+        caracter_ante_anterior = caracter_anterior    
         caracter_anterior = caracter
         valor_entero += dic_romano_a_entero.get(caracter,0)
 
@@ -115,7 +126,7 @@ def romano_a_entero(romano:str)->int:
    
     return valor_entero
 
-#print(romano_a_entero("LL"))
+#print(romano_a_entero("IIX"))
 
 
 def entero_a_romano(numero:int )->str:
