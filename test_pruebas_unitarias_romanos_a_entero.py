@@ -75,5 +75,3 @@ def test_romano_no_se_resta_repeticion():
         romano_a_entero("IIX")
     assert str(exeptionInfo.value) == 'No se puede restar'
 
-    
-

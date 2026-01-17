@@ -130,11 +130,15 @@ def romano_a_entero(romano:str)->int:
 
 
 def entero_a_romano(numero:int )->str:
-    numero = str(numero)#Transformar en cadena el valor (numero)
-    numero = "{:0>4d}".format(numero)
+    if numero < 0 or numero > 3999:
+        raise RomanNumberError("El limite esta entre mayor a 0 y 3999")
+    
+    if numero == 0:
+        return ""
+    
 
-    numero_list = list(numero) #Guardar una lista['1','9','9','4']
-    #print(numero_list)
+    numero = "{:0>4d}".format(numero)
+    numero_list = list(numero)
     valor_romano = ''
     cont = 0
     valor_num = 1000
