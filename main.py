@@ -67,6 +67,8 @@ dic_entero_a_romano = {
     100:'C',200:'CC',300:'CCC',400:'CD',500:'D',600:'DC',700:'DCC',800:'DCCC',900:'CM',
     1000:'M', 2000:'MM', 3000:'MMM'}
 
+regla_restas = {'I':('V','X'),'X':('L','C'),'C':('D','M')}
+
 class RomanNumberError( Exception ):
     pass
 
@@ -90,6 +92,20 @@ def romano_a_entero(romano:str)->int:
             cont_repes = 0
 
         if dic_romano_a_entero.get(caracter_anterior,0) < dic_romano_a_entero.get(caracter,0):
+            """
+            if caracter_anterior == 'I' and (caracter != 'V' or caracter != 'X'):
+                valor_entero -= dic_romano_a_entero.get(caracter_anterior,0)*2
+                
+            
+            elif caracter_anterior == 'I' and (caracter != 'V' or caracter != 'X'):
+                valor_entero -= dic_romano_a_entero.get(caracter_anterior,0)*2
+            
+            else:
+                raise RomanNumberError('"X"sólo se puede restar de "V" y "X"')
+            """
+            if caracter_anterior and caracter not in regla_restas[caracter_anterior]:
+                raise RomanNumberError(f"{caracter_anterior} sólo se puede restar de {regla_restas[caracter_anterior][0]} y {regla_restas[caracter_anterior][1]}")
+            
             valor_entero -= dic_romano_a_entero.get(caracter_anterior,0)*2
             
         caracter_anterior = caracter
@@ -99,7 +115,7 @@ def romano_a_entero(romano:str)->int:
    
     return valor_entero
 
-print(romano_a_entero("LL"))
+#print(romano_a_entero("LL"))
 
 
 def entero_a_romano(numero:int )->str:

@@ -44,5 +44,14 @@ def test_romano_a_entero_no_repetir_03():
     with pytest.raises( RomanNumberError ) as exeptionInfo:
         romano_a_entero("VV")
     assert str(exeptionInfo.value) == ("Los caracteres 'D' 'L'y'V' no se pueden repetir")
-    
+
+def test_romano_a_entero_solo_se_resta01():
+    with pytest.raises( RomanNumberError ) as exeptionInfo:
+        romano_a_entero("IL")
+    assert str(exeptionInfo.value) == 'I sólo se puede restar de V y X'
+
+def test_romano_a_entero_solo_se_resta01():
+    with pytest.raises( RomanNumberError ) as exeptionInfo:
+        romano_a_entero("XM")
+    assert str(exeptionInfo.value) == 'X sólo se puede restar de L y C'  
 
