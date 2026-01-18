@@ -144,7 +144,7 @@ def entero_a_romano(numero:int )->str:
     valor_num = 1000
     while cont < len(numero_list):
         numero_list[cont] = int(numero_list[cont]) * valor_num
-        valor_romano += dic_entero_a_romano.get(numero_list[cont])
+        valor_romano += dic_entero_a_romano.get(numero_list[cont],'')
         cont += 1
         valor_num /= 10
 
